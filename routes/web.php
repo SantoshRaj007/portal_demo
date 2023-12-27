@@ -32,6 +32,9 @@ Route::controller(AccountController::class)->group(function(){
             Route::put('/update-profile','updateProfile')->name('account.updateProfile');
             Route::post('/update-profile-pic','updateProfilePic')->name('account.updateProfilePic');
             Route::get('/logout','logout')->name('account.logout');
+            Route::get('/create-job','createJob')->name('account.createJob');
+            Route::post('/save-job','saveJob')->name('account.saveJob');
+            Route::get('/my-jobs','myJobs')->name('account.myJobs');
         });
 
     });
