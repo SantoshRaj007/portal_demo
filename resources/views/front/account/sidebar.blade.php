@@ -8,11 +8,7 @@
         
         <h5 class="mt-3 pb-0">{{ Auth::user()->name }}</h5>
         <p class="text-muted mb-1 fs-6">{{ Auth::user()->designation }}</p>
-<<<<<<< HEAD
-        {{-- <p class="text-muted mb-1 fs-6"><span class="text-success">DOJ</span> : {{ \Carbon\Carbon::parse($user->created_at)->format('M d, Y')}}</p> --}}
-=======
-        <p class="text-muted mb-1 fs-6"><span class="text-success">DOJ</span> : {{ \Carbon\Carbon::parse($user->created_at)->format('M d, Y')}}</p>
->>>>>>> 58c6c7d134496184e9ebf11110b382f1b0ad0044
+        <p class="text-muted mb-1 fs-6"><span class="text-success">DOJ</span> : {{ \Carbon\Carbon::parse(Auth::user()->created_at)->format('M d, Y')}}</p>
         <div class="d-flex justify-content-center mb-2">
             <button data-bs-toggle="modal" data-bs-target="#exampleModal" type="button" class="btn btn-primary">Change Profile Picture</button>
         </div>
@@ -31,10 +27,10 @@
                 <a href="{{ route('account.myJobs') }}">My Jobs</a>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                <a href="job-applied.html">Jobs Applied</a>
+                <a href="">Jobs Applied</a>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                <a href="saved-jobs.html">Saved Jobs</a>
+                <a href="">Saved Jobs</a>
             </li> 
             <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                 <a href="{{ route('account.logout')}}">Logout</a>
