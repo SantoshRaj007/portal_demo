@@ -310,6 +310,26 @@ class AccountController extends Controller
         }
     }
 
+    public function deleteJob(Request $request) {
+        $job = Job::where([
+            'user_id' => Auth::user()->id,
+            'id' => $request->jobId
+        ])->first();
+
+        if ($job == null) {
+            session()->flash('error', 'Either job deleted or not found.!!');
+            return response()->json([
+                'status' => true
+            ]);
+        }
+
+        Job::where('id', $request->jobId)->delete();
+        session()->flash('success', 'Job deleted successfully.!!');
+        return response()->json([
+            'status' => true
+        ]);
+    }
+
     public function jobDetails($id) {
 
         $categories = Category::orderBy('name','ASC')->where('status',1)->get();
@@ -319,6 +339,7 @@ class AccountController extends Controller
             'user_id' => Auth::user()->id,
             'id' => $id
         ])->first();
+        
         if($job == null) {
             abort(404);
         }
