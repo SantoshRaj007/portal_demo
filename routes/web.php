@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JobsCantroller;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/',[HomeController::class,'index'])->name('home');
+Route::get('/jobs',[JobsCantroller::class,'index'])->name('jobs');
 
 // Using Group Controller
 

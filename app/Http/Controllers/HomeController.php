@@ -19,18 +19,16 @@ class HomeController extends Controller
     
     public function index() {
 
-        $categories = Category::orderBy('name','ASC')->where('status',1)->get();
-        $data['category'] = $categories;
+        $categories = Category::where('status',1)->orderBy('name','ASC')->take(8)->get();
 
-        $jobTypes = JobType::orderBy('name','ASC')->where('status',1)->get();
-        $data['jobType'] = $jobTypes;
+        $featuredJobs = Job::where('status',1)->orderBy('created_at','DESC')->with('jobType')->where('isFeatured',1)->take(6)->get();
 
-        $jobs = Job::where(['user_id' => Auth::user()->id])->orderBy('id','ASC')->where('status',1)->paginate(6);
-        $data['letestJobs'] = $jobs;
+        $letestJobs = Job::where('status',1)->with('jobType')->orderBy('created_at','DESC')->take(6)->get();
 
-        $featuredProducts = Job::where(['user_id' => Auth::user()->id])->where('isFeatured',0)->orderBy('id','ASC')->where('status',1)->take(6)->get();
-        $data['featuredProducts'] = $featuredProducts;
-
-        return view('front.home', $data);
+        return view('front.home', [
+            'categories' => $categories,
+            'featuredJobs' => $featuredJobs,
+            'letestJobs' => $letestJobs
+        ]);
     }
 }

@@ -49,12 +49,12 @@
     <div class="container">
         <h2>Popular Categories</h2>
         <div class="row pt-5">
-            @if ($letestJobs->isNotEmpty())
-            @foreach ( $letestJobs as $job )
+            @if ($categories->isNotEmpty())
+            @foreach ( $categories as $category )
             <div class="col-lg-4 col-xl-3 col-md-6"> 
                 <div class="single_catagory">
-                    <a href="{{ route('account.jobDetails', $job->id ) }}"><h4 class="pb-2">{{ $job->title}}</h4></a>
-                    <p class="mb-0"> <span>{{ $job->vacancy }}</span> Available position</p>
+                    <a href="#"><h4 class="pb-2">{{ $category->name}}</h4></a>
+                    <p class="mb-0"> <span>{{ $category->vacancy }}</span> Available position</p>
                 </div> 
             </div>
             @endforeach
@@ -70,30 +70,33 @@
             <div class="job_listing_area">                    
                 <div class="job_lists">
                     <div class="row">
-                        @if ($featuredProducts->isNotEmpty())
-                            @foreach ($featuredProducts as $jobs)
+                        @if ($featuredJobs->isNotEmpty())
+                            @foreach ($featuredJobs as $featuredJob)
                             <div class="col-md-4">
                                 <div class="card border-0 p-3 shadow mb-4">
                                     <div class="card-body">
-                                        <h3 class="border-0 fs-5 pb-2 mb-0">{{ $jobs->title }}</h3>
-                                        <p>{{ Str::limit($jobs->description, 50) }}</p>
+                                        <h3 class="border-0 fs-5 pb-2 mb-0">{{ $featuredJob->title }}</h3>
+                                        <p>{{ Str::words($featuredJob->description, 50) }}</p>
                                         <div class="bg-light p-3 border">
                                             <p class="mb-0">
                                                 <span class="fw-bolder"><i class="fa fa-map-marker"></i></span>
-                                                <span class="ps-1">{{ $jobs->location }}</span>
+                                                <span class="ps-1">{{ $featuredJob->location }}</span>
                                             </p>
                                             <p class="mb-0">
                                                 <span class="fw-bolder"><i class="fa fa-clock-o"></i></span>
-                                                <span class="ps-1">{{ $jobs->jobType->name }}</span>
+                                                <span class="ps-1">{{ $featuredJob->jobType->name }}</span>
                                             </p>
+                                            @if (!is_null($featuredJob->salary))
                                             <p class="mb-0">
                                                 <span class="fw-bolder"><i class="fa fa-usd"></i></span>
-                                                <span class="ps-1">{{ $job->salary }}</span>
+                                                <span class="ps-1">{{ $featuredJob->salary }}</span>
                                             </p>
+                                            @endif
+                                            
                                         </div>
     
                                         <div class="d-grid mt-3">
-                                            <a href="{{ route('account.jobDetails', $jobs->id) }}" class="btn btn-primary btn-lg">Details</a>
+                                            <a href="#" class="btn btn-primary btn-lg">Details</a>
                                         </div>
                                     </div>
                                 </div>
@@ -115,39 +118,37 @@
                 <div class="job_lists">
                     <div class="row">
                         @if ($letestJobs->isNotEmpty())
-                            @foreach ($letestJobs as $jobs)
+                            @foreach ($letestJobs as $letestJob)
                             <div class="col-md-4">
                                 <div class="card border-0 p-3 shadow mb-4">
                                     <div class="card-body">
-                                        <h3 class="border-0 fs-5 pb-2 mb-0">{{ $jobs->title }}</h3>
-                                        <p>{{ Str::limit($jobs->description, 50) }}</p>
+                                        <h3 class="border-0 fs-5 pb-2 mb-0">{{ $letestJob->title }}</h3>
+                                        <p>{{ Str::limit($letestJob->description, 50) }}</p>
                                         <div class="bg-light p-3 border">
                                             <p class="mb-0">
                                                 <span class="fw-bolder"><i class="fa fa-map-marker"></i></span>
-                                                <span class="ps-1">{{ $jobs->location }}</span>
+                                                <span class="ps-1">{{ $letestJob->location }}</span>
                                             </p>
                                             <p class="mb-0">
                                                 <span class="fw-bolder"><i class="fa fa-clock-o"></i></span>
-                                                <span class="ps-1">{{ $jobs->jobType->name }}</span>
+                                                <span class="ps-1">{{ $letestJob->jobType->name }}</span>
                                             </p>
+                                            @if (!is_null($letestJob->salary))
                                             <p class="mb-0">
                                                 <span class="fw-bolder"><i class="fa fa-usd"></i></span>
-                                                <span class="ps-1">{{ $jobs->salary }}</span>
+                                                <span class="ps-1">{{ $letestJob->salary }}</span>
                                             </p>
+                                            @endif
                                         </div>
 
                                         <div class="d-grid mt-3">
-                                            <a href="{{ route('account.jobDetails', $jobs->id ) }}" class="btn btn-primary btn-lg">Details</a>
+                                            <a href="#" class="btn btn-primary btn-lg">Details</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             @endforeach    
                         @endif 
-                        
-                        <div>
-                            {{ $letestJobs->links() }}
-                        </div>
                     </div>
                 </div>
             </div>
