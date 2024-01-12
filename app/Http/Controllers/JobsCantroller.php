@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Job;
 use App\Models\JobType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class JobsCantroller extends Controller
 {
@@ -65,6 +66,23 @@ class JobsCantroller extends Controller
             'jobTypes' => $jobTypes,
             'jobs' => $jobs,
             'jobTypeArray' => $jobTypeArray,
+        ]);
+    }
+
+    // This method show job detail page
+
+    public function detail($id) {
+
+        $job = Job::where([
+            'id' => $id, 
+            'status' => 1
+            ])->with(['jobType','category'])->first();
+        
+        if($job == null) {
+            abort(404);
+        }
+        return view('front.jobDetail',[
+            'job' => $job,
         ]);
     }
 }

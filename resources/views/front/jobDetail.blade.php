@@ -45,29 +45,19 @@
                     <div class="descript_wrap white-bg">
                         <div class="single_wrap">
                             <h4>Job description</h4>
-                            <p>{{ $job->description }}</p>
+                            <p>{!! nl2br($job->description) !!}</p>
                         </div>
                         <div class="single_wrap">
                             <h4>Responsibility</h4>
-                            <ul>
-                                <li>The applicants should have experience in the following areas.</li>
-                                <li>Have sound knowledge of commercial activities.</li>
-                                <li>Leadership, analytical, and problem-solving abilities.</li>
-                                <li>Should have vast knowledge in IAS/ IFRS, Company Act, Income Tax, VAT.</li>
-                            </ul>
+                            {!! nl2br($job->responsibility)!!}
                         </div>
                         <div class="single_wrap">
                             <h4>Qualifications</h4>
-                            <ul>
-                                <li>The applicants should have experience in the following areas.</li>
-                                <li>Have sound knowledge of commercial activities.</li>
-                                <li>Leadership, analytical, and problem-solving abilities.</li>
-                                <li>Should have vast knowledge in IAS/ IFRS, Company Act, Income Tax, VAT.</li>
-                            </ul>
+                            {!! nl2br($job->qualifications) !!}
                         </div>
                         <div class="single_wrap">
                             <h4>Benefits</h4>
-                            <p>{{ $job->benefits }}</p>
+                            <p>{!! nl2br($job->benefits) !!}</p>
                         </div>
                         <div class="border-bottom"></div>
                         <div class="pt-3 text-end">

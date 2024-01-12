@@ -98,14 +98,14 @@
                                                 <span class="fw-bolder"><i class="fa fa-clock-o"></i></span>
                                                 <span class="ps-1">{{ $job->jobType->name }}</span>
                                             </p>
-                                            <p class="mb-0">Category : {{ $job->category->name }}</p>
+                                            {{-- <p class="mb-0">Category : {{ $job->category->name }}</p>
                                             @if (!is_null($job->vacancy))
                                             <p class="mb-0">
                                                 Vacancy : <span class="fw-bolder"></span>
                                                 <span class="ps-1">{{ $job->vacancy }}</span>
                                             </p>
                                             @endif
-                                            <p class="mb-0">Experience : {{ $job->experience }} Years</p>
+                                            <p class="mb-0">Experience : {{ $job->experience }} Years</p> --}}
                                             @if (!is_null($job->salary))
                                             <p class="mb-0">
                                                 Salary : <span class="fw-bolder"><i class="fa fa-usd"></i></span>
@@ -116,7 +116,7 @@
                                         </div>
     
                                         <div class="d-grid mt-3">
-                                            <a href="#" class="btn btn-primary btn-lg">Details</a>
+                                            <a href="{{ route('jobDetail',$job->id) }}" class="btn btn-primary btn-lg">Details</a>
                                         </div>
                                     </div>
                                 </div>

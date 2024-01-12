@@ -49,7 +49,7 @@
                                     
                                     <tr class="active">
                                         <td>
-                                            <div class="job-name fw-500"><a href="{{ route('account.jobDetails', $job->id) }}" class="text-info">{{ $job->title }}</a></div>
+                                            <div class="job-name fw-500"><a href="{{ route('jobDetail',$job->id) }}" class="text-info">{{ $job->title }}</a></div>
                                             <div class="info1">{{ $job->jobType->name }} . {{ $job->location }}</div>
                                         </td>
                                         <td>
@@ -71,7 +71,7 @@
                                                     <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                                                 </button>
                                                 <ul class="dropdown-menu dropdown-menu-end">
-                                                    <li><a class="dropdown-item" href="{{ route('account.jobDetails', $job->id) }}"> <i class="fa fa-eye" aria-hidden="true"></i> View</a></li>
+                                                    <li><a class="dropdown-item" href="{{ route('jobDetail',$job->id) }}"> <i class="fa fa-eye" aria-hidden="true"></i> View</a></li>
                                                     <li><a class="dropdown-item" href="{{ route('account.editJob', $job->id) }}"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a></li>
                                                     <li><a class="dropdown-item" href="#" onclick="deleteJob({{ $job->id }})"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a></li>
                                                 </ul>

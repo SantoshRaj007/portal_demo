@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/jobs',[JobsCantroller::class,'index'])->name('jobs');
+Route::get('/jobs/detail/{id}',[JobsCantroller::class,'detail'])->name('jobDetail');
 
 // Using Group Controller
 
@@ -40,7 +41,7 @@ Route::controller(AccountController::class)->group(function(){
             Route::get('/my-jobs/edit/{jobId}','editJob')->name('account.editJob');
             Route::post('/update-job/{jobId}','updateJob')->name('account.updateJob');
             Route::post('/delete-job','deleteJob')->name('account.deleteJob');
-            Route::get('/job-details/{jobId}','jobDetails')->name('account.jobDetails');
+            // Route::get('/job-details/{jobId}','jobDetails')->name('account.jobDetails');
         });
 
     });

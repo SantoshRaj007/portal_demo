@@ -330,24 +330,24 @@ class AccountController extends Controller
         ]);
     }
 
-    public function jobDetails($id) {
+    // public function jobDetails($id) {
 
-        $categories = Category::orderBy('name','ASC')->where('status',1)->get();
-        $jobTypes = JobType::orderBy('name','ASC')->where('status',1)->get();
+    //     $categories = Category::orderBy('name','ASC')->where('status',1)->get();
+    //     $jobTypes = JobType::orderBy('name','ASC')->where('status',1)->get();
 
-        $job = Job::where([
-            'user_id' => Auth::user()->id,
-            'id' => $id
-        ])->first();
+    //     $job = Job::where([
+    //         'user_id' => Auth::user()->id,
+    //         'id' => $id
+    //     ])->first();
         
-        if($job == null) {
-            abort(404);
-        }
+    //     if($job == null) {
+    //         abort(404);
+    //     }
 
-        return view('front.account.job.job-details',[
-            'categories' => $categories,
-            'jobTypes' => $jobTypes,
-            'job' => $job,
-        ]);
-    }    
+    //     return view('front.account.job.job-details',[
+    //         'categories' => $categories,
+    //         'jobTypes' => $jobTypes,
+    //         'job' => $job,
+    //     ]);
+    // }    
 }
