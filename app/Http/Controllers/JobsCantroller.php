@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Job;
+use App\Models\JobApplication;
 use App\Models\JobType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -83,6 +84,61 @@ class JobsCantroller extends Controller
         }
         return view('front.jobDetail',[
             'job' => $job,
+        ]);
+    }
+
+    public function applyJob(Request $request) {
+        $id = $request->id;
+
+        $job = Job::where('id',$id)->first();
+        //if job not found in db
+        if($job == null) {
+            session()->flash('error','Job Does not exist');
+            return response()->json([
+                'status' => false,
+                'message' => 'Job Does not exist'
+            ]);
+        }   
+        
+        // you can not apply on your own job
+
+        $employer_id = $job->user_id;
+
+        if($employer_id == Auth::user()->id) {
+            session()->flash('error','You can not apply on your own job');
+            return response()->json([
+                'status' => false,
+                'message' => 'You can not apply on your own job'
+            ]);
+        }
+        // You can not apply on a job twise
+
+        $jobApplicationCount = JobApplication::where([
+            'user_id' => Auth::user()->id,
+            'job_id' => $id,            
+        ])->count();
+
+        if($jobApplicationCount > 0) {
+            $message = 'You have already apply on this job';
+            session()->flash('error',$message);
+            return response()->json([
+                'status' => false,
+                'message' => $message
+            ]);
+        }
+
+        $application = new JobApplication();
+        $application->job_id = $id;
+        $application->user_id = Auth::user()->id;
+        $application->employer_id = $employer_id;
+        $application->applied_date = now();
+        $application->save();
+
+        $message = 'You have successfully applied.';
+        session()->flash('success',$message);
+        return response()->json([
+            'status' => true,
+            'message' => $message
         ]);
     }
 }

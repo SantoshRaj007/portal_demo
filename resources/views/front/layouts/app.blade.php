@@ -38,7 +38,7 @@
 					<a class="btn btn-outline-primary me-2" href="{{ route('account.profile') }}" type="submit">{{ Auth::user()->name }}</a>
 				@endif	
 				
-				<a class="btn btn-primary" href="" type="submit">Post a Product</a>
+				<a class="btn btn-primary" href="{{ route('jobs') }}" type="submit">Post a Product</a>
 			</div>
 		</div>
 	</nav>

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/jobs',[JobsCantroller::class,'index'])->name('jobs');
 Route::get('/jobs/detail/{id}',[JobsCantroller::class,'detail'])->name('jobDetail');
+Route::post('/apply-job',[JobsCantroller::class,'applyJob'])->name('applyJob');
 
 // Using Group Controller
 
