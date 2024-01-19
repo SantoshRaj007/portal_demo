@@ -360,20 +360,20 @@ class AccountController extends Controller
         ]);
     }
 
-    public function removeJob(Request $request) {
-        $job = JobApplication::where([
+    public function removeJobs(Request $request) {
+        $jobApplication = JobApplication::where([
             'user_id' => Auth::user()->id,
-            'id' => $request->jobId
+            'id' => $request->id
         ])->first();
 
-        if ($job == null) {
+        if ($jobApplication == null) {
             session()->flash('error', 'Either job remove or not found.!!');
             return response()->json([
-                'status' => true
+                'status' => false,
             ]);
         }
 
-        Job::where('id', $request->jobId)->delete();
+        JobApplication::find($request->id)->delete();
         session()->flash('success', 'Job remove successfully.!!');
         return response()->json([
             'status' => true

@@ -67,7 +67,7 @@
                                                 </button>
                                                 <ul class="dropdown-menu dropdown-menu-end">
                                                     <li><a class="dropdown-item" href="{{ route('jobDetail',$jobApplication->job_id) }}"> <i class="fa fa-eye" aria-hidden="true"></i> View</a></li>
-                                                    <li><a class="dropdown-item" href="#" onclick="removeJob({{ $jobApplication->job_id }})"><i class="fa fa-trash" aria-hidden="true"></i> Remove</a></li>
+                                                    <li><a class="dropdown-item" href="#" onclick="removeJob({{ $jobApplication->id }})"><i class="fa fa-trash" aria-hidden="true"></i> Remove</a></li>
                                                 </ul>
                                             </div>
                                         </td>
@@ -92,20 +92,20 @@
 
 @section('customJS')
 
-<script type="text/javascript">
-    function removeJob(jobId) {
-        if (confirm("Are you sure you want to remove job?")) {
-            $.ajax({
-                url: '{{ route("account.removeJob") }}',
-                type: 'post',
-                data: {jobId: jobId},
-                dataType: 'json',
-                success: function (response) {
-                    window.location.href='{{ route("account.myJobs") }}';
-                }
-            });
+    <script type="text/javascript">
+        function removeJob(id) {
+            if (confirm("Are you sure you want to remove job?")) {
+                $.ajax({
+                    url: '{{ route("account.removeJobs") }}',
+                    type: 'post',
+                    data: {id: id},
+                    dataType: 'json',
+                    success: function (response) {
+                        window.location.href='{{ route("account.myJobApplications") }}';
+                    }
+                });
+            }
         }
-    }
-</script>
+    </script>
 
 @endsection
