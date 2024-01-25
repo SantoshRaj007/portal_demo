@@ -72,7 +72,7 @@
                             @if (Auth::check())
                                 <a href="#" onclick="saveJob({{ $job->id }});" class="btn btn-secondary">Save</a>
                             @else
-                                <a href="#" class="btn btn-secondary">Login to Save</a>  
+                                <a href="{{ route('account.login') }}" class="btn btn-secondary">Login to Save</a>  
                             @endif
                             
                             @if (Auth::check())
