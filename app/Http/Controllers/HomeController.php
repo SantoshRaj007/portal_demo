@@ -21,6 +21,8 @@ class HomeController extends Controller
 
         $categories = Category::where('status',1)->orderBy('name','ASC')->take(8)->get();
 
+        $newCategories = Category::where('status',1)->orderBy('name','ASC')->get();
+
         $featuredJobs = Job::where('status',1)->orderBy('created_at','DESC')->with('jobType')->where('isFeatured',1)->take(6)->get();
 
         $letestJobs = Job::where('status',1)->with('jobType')->orderBy('created_at','DESC')->take(6)->get();
@@ -28,7 +30,8 @@ class HomeController extends Controller
         return view('front.home', [
             'categories' => $categories,
             'featuredJobs' => $featuredJobs,
-            'letestJobs' => $letestJobs
+            'letestJobs' => $letestJobs,
+            'newCategories' => $newCategories,
         ]);
     }
 }

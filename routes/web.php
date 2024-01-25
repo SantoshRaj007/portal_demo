@@ -13,6 +13,7 @@ Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/jobs',[JobsCantroller::class,'index'])->name('jobs');
 Route::get('/jobs/detail/{id}',[JobsCantroller::class,'detail'])->name('jobDetail');
 Route::post('/apply-job',[JobsCantroller::class,'applyJob'])->name('applyJob');
+Route::post('/save-job',[JobsCantroller::class,'saveJob'])->name('saveJob');
 
 // Using Group Controller
 
