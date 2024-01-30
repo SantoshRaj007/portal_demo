@@ -44,8 +44,10 @@ Route::controller(AccountController::class)->group(function(){
             Route::post('/update-job/{jobId}','updateJob')->name('account.updateJob');
             Route::post('/delete-job','deleteJob')->name('account.deleteJob');
             Route::get('/my-job-applications','myJobApplications')->name('account.myJobApplications');
-            Route::post('/remove-job-application','removeJobs')->name('account.removeJobs');
+            Route::post('/remove-job-application','removeJob')->name('account.removeJob');
             Route::get('/saved-jobs','savedJobs')->name('account.savedJobs');
+            Route::post('/remove-saved-job','removeSavedJob')->name('account.removeSavedJob');
+
         });
 
     });

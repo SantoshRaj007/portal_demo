@@ -32,7 +32,6 @@
                                 <thead class="bg-light">
                                     <tr>
                                         <th scope="col">Title</th>
-                                        <th scope="col">Applied Date</th>
                                         <th scope="col">Applicants</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Action</th>
@@ -48,9 +47,6 @@
                                             <div class="job-name fw-500"><a href="{{ route('jobDetail',$savedJob->job->id) }}" class="text-info">{{ $savedJob->job->title }}</a></div>
                                             <div class="info1">{{ $savedJob->job->jobType->name }} . {{ $savedJob->job->location }}</div>
                                         </td>
-                                        <td>
-                                            <div class="job-name fw-500">{{ \Carbon\Carbon::parse($savedJob->applied_date)->format('d M,Y') }}</div>
-                                        </td>
                                         <td>{{ $savedJob->job->vacancy }} Applications</td>
                                         <td>
                                             @if ($savedJob->job->status == 1)
@@ -61,7 +57,7 @@
                                             
                                         </td>
                                         <td>
-                                            <div class="action-dots float-end">
+                                            <div class="action-dots">
                                                 <button href="#" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
                                                     <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                                                 </button>
@@ -96,12 +92,12 @@
         function removeJob(id) {
             if (confirm("Are you sure you want to remove job?")) {
                 $.ajax({
-                    url: '{{ route("account.removeJobs") }}',
+                    url: '{{ route("account.removeSavedJob") }}',
                     type: 'post',
                     data: {id: id},
                     dataType: 'json',
                     success: function (response) {
-                        window.location.href='{{ route("account.myJobApplications") }}';
+                        window.location.href='{{ route("account.savedJobs") }}';
                     }
                 });
             }
