@@ -106,6 +106,7 @@
                                             <tr>
                                                 <th scope="col">Name</th>
                                                 <th scope="col">Email</th>
+                                                <th scope="col">Mobile</th>
                                                 <th scope="col">Applied Date</th>
                                             </tr>
                                         </thead>    
@@ -115,9 +116,14 @@
                                             <tr class="active">
                                                 <td>{{ $application->user->name }}</td>
                                                 <td>{{ $application->user->email }}</td>
+                                                <td>{{ $application->user->mobile }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($application->applied_date)->format('d M,Y') }}</td>
                                             </tr> 
                                             @endforeach
+                                            @else
+                                            <tr>
+                                                <td colspan="4">Applicants not found...!</td>
+                                            </tr>
                                         @endif
                                         </tbody>
 
