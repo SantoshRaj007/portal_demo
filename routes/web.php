@@ -47,6 +47,7 @@ Route::controller(AccountController::class)->group(function(){
             Route::post('/remove-job-application','removeJob')->name('account.removeJob');
             Route::get('/saved-jobs','savedJobs')->name('account.savedJobs');
             Route::post('/remove-saved-job','removeSavedJob')->name('account.removeSavedJob');
+            Route::post('/update-password','updatePassword')->name('account.updatePassword');
 
         });
 

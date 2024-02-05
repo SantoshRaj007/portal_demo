@@ -51,20 +51,23 @@
                 </div>
 
                 <div class="card border-0 shadow mb-4">
-                    <form action="" method="post" name="passwordForm" id="passwordForm">
+                    <form action="" method="post" name="changePasswordForm" id="changePasswordForm">
                         <div class="card-body p-4">
                             <h3 class="fs-4 mb-1">Change Password</h3>
                             <div class="mb-4">
                                 <label for="" class="mb-2">Old Password*</label>
-                                <input type="password" name="password" id="password" placeholder="Old Password" class="form-control">
+                                <input type="password" name="old_password" id="old_password" placeholder="Old Password" class="form-control">
+                                <p></p>
                             </div>
                             <div class="mb-4">
                                 <label for="" class="mb-2">New Password*</label>
-                                <input type="password" name="ne_password" id="new_password" placeholder="New Password" class="form-control">
+                                <input type="password" name="new_password" id="new_password" placeholder="New Password" class="form-control">
+                                <p></p>
                             </div>
                             <div class="mb-4">
                                 <label for="" class="mb-2">Confirm Password*</label>
                                 <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password" class="form-control">
+                                <p></p>
                             </div>                        
                         </div>
                         <div class="card-footer  p-4">
@@ -110,25 +113,98 @@
                             $("#name").addClass('is-invalid')
                             .siblings('p')
                             .addClass('invalid-feedback')
-                            .html(errors.name)
+                            .html(errors.name);
                         } else {
                             $("#name").removeClass('is-invalid')
                             .siblings('p')
                             .removeClass('invalid-feedback')
-                            .html('')
+                            .html('');
                         }
 
                         if (errors.email) {
                             $("#email").addClass('is-invalid')
                             .siblings('p')
                             .addClass('invalid-feedback')
-                            .html(errors.email)
+                            .html(errors.email);
                         } else {
                             $("#email").removeClass('is-invalid')
                             .siblings('p')
                             .removeClass('invalid-feedback')
-                            .html('')
+                            .html('');
                         }
+                    }
+                }
+            });
+        });
+
+
+        $("#changePasswordForm").submit(function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: '{{ route("account.updatePassword") }}',
+                type: 'post',
+                dataType: 'json',
+                data: $("#changePasswordForm").serializeArray(),
+                success: function(response) {
+
+                    if (response.status == true) {
+                        
+                        $("#old_password").removeClass('is-invalid')
+                            .siblings('p')
+                            .removeClass('invalid-feedback')
+                            .html('')
+
+                        $("#new_password").removeClass('is-invalid')
+                            .siblings('p')
+                            .removeClass('invalid-feedback')
+                            .html('')
+
+                        $("#confirm_password").removeClass('is-invalid')
+                            .siblings('p')
+                            .removeClass('invalid-feedback')
+                            .html('')
+
+                        window.location.href="{{ route('account.profile') }}";
+                        
+                    } else {
+                        var errors = response.errors;
+
+                        if (errors.old_password) {
+                            $("#old_password").addClass('is-invalid')
+                            .siblings('p')
+                            .addClass('invalid-feedback')
+                            .html(errors.old_password);
+                        } else {
+                            $("#old_password").removeClass('is-invalid')
+                            .siblings('p')
+                            .removeClass('invalid-feedback')
+                            .html('');
+                        }
+
+                        if (errors.new_password) {
+                            $("#new_password").addClass('is-invalid')
+                            .siblings('p')
+                            .addClass('invalid-feedback')
+                            .html(errors.new_password);
+                        } else {
+                            $("#new_password").removeClass('is-invalid')
+                            .siblings('p')
+                            .removeClass('invalid-feedback')
+                            .html('');
+                        }
+
+                        if (errors.confirm_password) {
+                            $("#confirm_password").addClass('is-invalid')
+                            .siblings('p')
+                            .addClass('invalid-feedback')
+                            .html(errors.confirm_password);
+                        } else {
+                            $("#confirm_password").removeClass('is-invalid')
+                            .siblings('p')
+                            .removeClass('invalid-feedback')
+                            .html('');
+                        }                        
                     }
                 }
             });
