@@ -30,14 +30,19 @@
 						<a class="nav-link" aria-current="page" href="{{ route('home') }}">Home</a>
 					</li>	
 					<li class="nav-item">
-						<a class="nav-link" aria-current="page" href="{{ route('jobs') }}">Find Product</a>
+						<a class="nav-link" aria-current="page" href="{{ route('jobs') }}">Find Job</a>
 					</li>										
 				</ul>			
 				@if (!Auth::check())
+				
 					<a class="btn btn-outline-primary me-2" href="{{ route('account.login') }}" type="submit">Login</a>
 					@else
-					<a class="btn btn-outline-primary me-2" href="{{ route('account.profile') }}" type="submit">{{ Auth::user()->name }}</a>
-				@endif	
+						@if (Auth::user()->role == 'admin')	
+							<a class="btn btn-outline-primary me-2" href="{{ route('admin.dashboard') }}" type="submit">Admin</a>					
+						@endif
+						
+						<a class="btn btn-outline-primary me-2" href="{{ route('account.profile') }}" type="submit">Account</a>
+				@endif
 				
 				<a class="btn btn-primary" href="{{ route('jobs') }}" type="submit">Post a Product</a>
 			</div>

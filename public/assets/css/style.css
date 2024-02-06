@@ -10023,3 +10023,10 @@ footer .nav-link {
 .trumbowyg-editor ul li {
   list-style: disc;
 }
+
+.dashboard{
+  height: 400px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}

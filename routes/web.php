@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobsCantroller;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +15,12 @@ Route::get('/jobs',[JobsCantroller::class,'index'])->name('jobs');
 Route::get('/jobs/detail/{id}',[JobsCantroller::class,'detail'])->name('jobDetail');
 Route::post('/apply-job',[JobsCantroller::class,'applyJob'])->name('applyJob');
 Route::post('/save-job',[JobsCantroller::class,'saveJob'])->name('saveJob');
+
+// Admin Route Controller
+
+Route::group(['prefix' => 'admin','middleware' => 'checkRole'], function(){
+    Route::get('/dashboard',[DashboardController::class,'index'])->name('admin.dashboard');
+});
 
 // Using Group Controller
 
