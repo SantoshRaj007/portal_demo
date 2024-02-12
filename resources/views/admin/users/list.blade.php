@@ -63,7 +63,7 @@
                                                 </button>
                                                 <ul class="dropdown-menu dropdown-menu-end">
                                                     
-                                                    <li><a class="dropdown-item" href="#"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a></li>
+                                                    <li><a class="dropdown-item" href="{{ route('admin.edit', $user->id) }}"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a></li>
                                                     <li><a class="dropdown-item" href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a></li>
                                                 </ul>
                                             </div>

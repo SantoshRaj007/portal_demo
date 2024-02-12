@@ -22,6 +22,8 @@ Route::post('/save-job',[JobsCantroller::class,'saveJob'])->name('saveJob');
 Route::group(['prefix' => 'admin','middleware' => 'checkRole'], function(){
     Route::get('/dashboard',[DashboardController::class,'index'])->name('admin.dashboard');
     Route::get('/users',[UserController::class,'index'])->name('admin.users');
+    Route::get('/users/{id}',[UserController::class,'edit'])->name('admin.edit');
+    Route::put('/users/{id}',[UserController::class,'update'])->name('admin.update');
 });
 
 // Using Group Controller
