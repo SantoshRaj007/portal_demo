@@ -63,7 +63,7 @@
             e.preventDefault();
 
             $.ajax({
-                url: '{{ route("admin.update",$user->id) }}',
+                url: '{{ route("admin.users.update",$user->id) }}',
                 type: 'put',
                 dataType: 'json',
                 data: $("#userForm").serializeArray(),
