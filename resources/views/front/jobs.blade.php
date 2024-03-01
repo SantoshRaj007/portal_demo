@@ -81,53 +81,54 @@
             <div class="col-md-8 col-lg-9 ">
                 <div class="job_listing_area">                    
                     <div class="job_lists">
-                    <div class="row">
-                        @if ($jobs->isNotEmpty())
-                            @foreach ($jobs as $job)
-                            <div class="col-md-4">
-                                <div class="card border-0 p-3 shadow mb-4">
-                                    <div class="card-body">
-                                        <h3 class="border-0 fs-5 pb-2 mb-0">{{ $job->title }}</h3>
-                                        <p>{{ Str::limit(strip_tags($job->description),50) }}</p>
-                                        <div class="bg-light p-3 border">
-                                            <p class="mb-0">
-                                                <span class="fw-bolder"><i class="fa fa-map-marker"></i></span>
-                                                <span class="ps-1">{{ $job->location }}</span>
-                                            </p>
-                                            <p class="mb-0">
-                                                <span class="fw-bolder"><i class="fa fa-clock-o"></i></span>
-                                                <span class="ps-1">{{ $job->jobType->name }}</span>
-                                            </p>
-                                            {{-- <p class="mb-0">Category : {{ $job->category->name }}</p>
-                                            @if (!is_null($job->vacancy))
-                                            <p class="mb-0">
-                                                Vacancy : <span class="fw-bolder"></span>
-                                                <span class="ps-1">{{ $job->vacancy }}</span>
-                                            </p>
-                                            @endif
-                                            <p class="mb-0">Experience : {{ $job->experience }} Years</p> --}}
-                                            @if (!is_null($job->salary))
-                                            <p class="mb-0">
-                                                Salary : <span class="fw-bolder"><i class="fa fa-usd"></i></span>
-                                                <span class="ps-1">{{ $job->salary }}</span>
-                                            </p>
-                                            @endif
-                                            
+                        <div class="row">
+                            @if ($jobs->isNotEmpty())
+                                @foreach ($jobs as $job)
+                                    <div class="col-md-4">
+                                        <div class="card border-0 p-3 shadow mb-4">
+                                            <div class="card-body">
+                                                <h3 class="border-0 fs-5 pb-2 mb-0">{{ $job->title }}</h3>
+                                                <p>{{ Str::limit(strip_tags($job->description),50) }}</p>
+                                                <div class="bg-light p-3 border">
+                                                    <p class="mb-0">
+                                                        <span class="fw-bolder"><i class="fa fa-map-marker"></i></span>
+                                                        <span class="ps-1">{{ $job->location }}</span>
+                                                    </p>
+                                                    <p class="mb-0">
+                                                        <span class="fw-bolder"><i class="fa fa-clock-o"></i></span>
+                                                        <span class="ps-1">{{ $job->jobType->name }}</span>
+                                                    </p>
+                                                    {{-- <p class="mb-0">Category : {{ $job->category->name }}</p>
+                                                    @if (!is_null($job->vacancy))
+                                                    <p class="mb-0">
+                                                        Vacancy : <span class="fw-bolder"></span>
+                                                        <span class="ps-1">{{ $job->vacancy }}</span>
+                                                    </p>
+                                                    @endif
+                                                    <p class="mb-0">Experience : {{ $job->experience }} Years</p> --}}
+                                                    @if (!is_null($job->salary))
+                                                    <p class="mb-0">
+                                                        Salary : <span class="fw-bolder"><i class="fa fa-usd"></i></span>
+                                                        <span class="ps-1">{{ $job->salary }}</span>
+                                                    </p>
+                                                    @endif
+                                                    
+                                                </div>
+            
+                                                <div class="d-grid mt-3">
+                                                    <a href="{{ route('jobDetail',$job->id) }}" class="btn btn-primary btn-lg">Details</a>
+                                                </div>
+                                            </div>
                                         </div>
-    
-                                        <div class="d-grid mt-3">
-                                            <a href="{{ route('jobDetail',$job->id) }}" class="btn btn-primary btn-lg">Details</a>
-                                        </div>
+                                    </div> 
+                                @endforeach
+                                    <div class="col-md-12">
+                                        {{ $jobs->withQueryString()->links() }} 
                                     </div>
-                                </div>
-                            </div> 
-                            @endforeach
-                            @else
-                            <div class="col-md-12">Jobs not found</div>
-                        @endif
-                        
-                                                 
-                    </div>
+                                @else
+                                <div class="col-md-12">Jobs not found</div>
+                            @endif                
+                        </div>
                     </div>
                 </div>
             </div>
