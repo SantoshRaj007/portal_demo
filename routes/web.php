@@ -18,6 +18,9 @@ Route::get('/jobs',[JobsCantroller::class,'index'])->name('jobs');
 Route::get('/jobs/detail/{id}',[JobsCantroller::class,'detail'])->name('jobDetail');
 Route::post('/apply-job',[JobsCantroller::class,'applyJob'])->name('applyJob');
 Route::post('/save-job',[JobsCantroller::class,'saveJob'])->name('saveJob');
+Route::get('/forgot-password',[AccountController::class,'forgotPassword'])->name('account.forgotPassword');
+Route::post('/process-forgot-password',[AccountController::class,'processForgotPassword'])->name('account.processForgotPassword');
+Route::get('/reset-password/{token}',[AccountController::class,'resetPassword'])->name('account.resetPassword');
 
 // Admin Route Controller
 
