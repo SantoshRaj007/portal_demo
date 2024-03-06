@@ -11,6 +11,7 @@ use App\Models\SavedJob;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -447,9 +448,9 @@ class AccountController extends Controller
 
         $token = Str::random(60);
 
-        \DB::table('password_reset_tokens')->where('email',$request->email)->delete();
+        DB::table('password_reset_tokens')->where('email',$request->email)->delete();
 
-        \DB::table('password_reset_tokens')->insert([
+        DB::table('password_reset_tokens')->insert([
             'email' => $request->email,
             'token' => $token,
             'created_at' => now()
@@ -466,7 +467,34 @@ class AccountController extends Controller
         return redirect()->route('account.forgotPassword')->with('success','Reset Password email has been send to your inbox..');
     }
 
-    public function resetPassword(){
-        
+    public function resetPassword($tokenString){
+        $token = DB::table('password_reset_tokens')->where('token',$tokenString)->first();
+
+        if ($token == null) {
+            return redirect()->route('account.forgotPassword')->with('error','Invalid reset token..!!');            
+        }
+
+        return view('front.account.reset-password',[
+            'tokenString' => $tokenString
+        ]);
+    }
+
+    public function processResetPassword(Request $request){
+        $token = DB::table('password_reset_tokens')->where('token',$request->token)->first();
+
+        $validator = Validator::make($request->all(),[
+            'new_password' => 'required|min:5',
+            'confirm_password' => 'required|same:new_password'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('account.resetPassword', $request->token)->withErrors($validator);
+        }
+
+        User::where('email', $token->email)->update([
+            'password' => Hash::make($request->new_password)
+        ]);
+
+        return redirect()->route('account.login')->with('success','You have successfully changed your password..!!');  
     }
 }
